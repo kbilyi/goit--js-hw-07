@@ -31,7 +31,7 @@ function createImageMarkup(galleryItems) {
 function onLinkClick(e) {
   e.target.firstElementChild.preventDefault();
 
-  if (!e.target.classList.contains("gallary__item")) {
+  if (e.target.nodeName != 'IMG') {
     return;
   }
 
@@ -41,7 +41,7 @@ function onLinkClick(e) {
     `<img src ="${bigImageLink}" width="800" height="600">`
   );
 }
+intance.show();
+console.log(bigImageLink);
 
-// intance.show();
-// console.log(bigImageLink);
 
