@@ -6,10 +6,6 @@ console.log(galleryItems);
 const gallaryEl = document.querySelector(".gallery");
 const createImageMarkupList = createImageMarkup(galleryItems);
 
-gallaryEl.insertAdjacentHTML("afterbegin", createImageMarkupList);
-
-gallaryEl.addEventListener("click", onLinkClick);
-
 function createImageMarkup(galleryItems) {
   return galleryItems
     .map(({ original, preview, description }) => {
@@ -28,20 +24,17 @@ function createImageMarkup(galleryItems) {
     .join("");
 }
 
-function onLinkClick(e) {
-  e.target.firstElementChild.preventDefault();
+gallaryEl.insertAdjacentHTML("afterbegin", createImageMarkupList);
+gallaryEl.addEventListener("click", onGallaryClick);
 
-  if (e.target.nodeName != 'IMG') {
-    return;
-  }
-
-  const bigImageLink = e.target.firstElementChild.href;
-
-  const intance = basicLightbox.create(
-    `<img src ="${bigImageLink}" width="800" height="600">`
-  );
+function onGallaryClick(event) {
+  event.preventDefault()
+  const item = event.target.dataset.source
+  const instanse = basicLightbox.create(`
+  <img src ="${item}" width="800" height="600">
+  `)
+  instanse.show()
 }
-intance.show();
-console.log(bigImageLink);
+
 
 
